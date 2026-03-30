@@ -8,6 +8,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 
 import Index from "./pages/Index";
 import Properties from "./pages/Properties";
+import MapSearch from "./pages/MapSearch";
 import PropertyDetail from "./pages/PropertyDetail";
 import Developers from "./pages/Developers";
 import About from "./pages/About";
@@ -36,6 +37,7 @@ const App = () => (
             {/* Public */}
             <Route path="/" element={<Index />} />
             <Route path="/properties" element={<Properties />} />
+            <Route path="/map-search" element={<MapSearch />} />
             <Route path="/property/:id" element={<PropertyDetail />} />
             <Route path="/developers" element={<Developers />} />
             <Route path="/about" element={<About />} />
