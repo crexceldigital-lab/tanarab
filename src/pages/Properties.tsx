@@ -2,28 +2,36 @@ import { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import SearchFilters from '@/components/SearchFilters';
+import SearchFilters, { type SearchFilterValues } from '@/components/SearchFilters';
 import PropertyCard from '@/components/PropertyCard';
 import { properties, statusOptions } from '@/data/mockProperties';
 import { Badge } from '@/components/ui/badge';
 
 const Properties = () => {
   const [searchParams] = useSearchParams();
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<SearchFilterValues>({
     city: searchParams.get('city') || '',
-    type: searchParams.get('type') || '',
+    types: searchParams.get('type') ? [searchParams.get('type')!] : [],
     query: searchParams.get('q') || '',
+    priceMin: 0,
+    priceMax: null,
   });
   const [statusFilter, setStatusFilter] = useState('');
 
   const filtered = useMemo(() => {
     return properties.filter((p) => {
       if (filters.city && p.city !== filters.city) return false;
-      if (filters.type && p.type !== filters.type) return false;
+      if (filters.types.length > 0 && !filters.types.includes(p.type)) return false;
       if (statusFilter && p.status !== statusFilter) return false;
+      if (filters.priceMin > 0 && p.price < filters.priceMin) return false;
+      if (filters.priceMax !== null && p.price > filters.priceMax) return false;
       if (filters.query) {
         const q = filters.query.toLowerCase();
-        return p.title.toLowerCase().includes(q) || p.location.toLowerCase().includes(q) || p.developer.toLowerCase().includes(q);
+        return (
+          p.title.toLowerCase().includes(q) ||
+          p.location.toLowerCase().includes(q) ||
+          p.developer.toLowerCase().includes(q)
+        );
       }
       return true;
     });
@@ -37,7 +45,7 @@ const Properties = () => {
         <SearchFilters filters={filters} onChange={setFilters} onSearch={() => {}} />
 
         {/* Status pills */}
-        <div className="mt-4 flex gap-2">
+        <div className="mt-4 flex gap-2 flex-wrap">
           <Badge
             variant={statusFilter === '' ? 'default' : 'outline'}
             className="cursor-pointer"

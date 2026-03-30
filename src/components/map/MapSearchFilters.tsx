@@ -1,6 +1,8 @@
-import { Search, SlidersHorizontal, ArrowUpDown } from 'lucide-react';
+import { Search, ArrowUpDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { unitTypeOptions, statusOptions, developerOptions } from '@/data/mapProperties';
+import { statusOptions, developerOptions } from '@/data/mapProperties';
+import PropertyTypeFilter from '@/components/filters/PropertyTypeFilter';
+import PriceRangeFilter from '@/components/filters/PriceRangeFilter';
 import type { MapFilters } from '@/pages/MapSearch';
 
 interface Props {
@@ -32,17 +34,20 @@ const MapSearchFilters = ({ filters, onChange, resultCount }: Props) => {
           />
         </div>
 
-        {/* Unit type */}
-        <select
-          value={filters.unitType}
-          onChange={(e) => onChange({ ...filters, unitType: e.target.value })}
-          className="rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none"
-        >
-          <option value="">Unit Type</option>
-          {unitTypeOptions.map((t) => (
-            <option key={t} value={t}>{t}</option>
-          ))}
-        </select>
+        {/* Property type multi-select */}
+        <PropertyTypeFilter
+          selected={filters.propertyTypes}
+          onChange={(propertyTypes) => onChange({ ...filters, propertyTypes })}
+        />
+
+        {/* Price Range */}
+        <PriceRangeFilter
+          min={filters.priceRange[0]}
+          max={filters.priceRange[1] >= 1_000_000_000 ? null : filters.priceRange[1]}
+          onChange={(min, max) =>
+            onChange({ ...filters, priceRange: [min, max ?? 1_000_000_000] })
+          }
+        />
 
         {/* Status */}
         <select

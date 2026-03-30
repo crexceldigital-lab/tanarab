@@ -1,21 +1,29 @@
-import { Search, MapPin, Home, SlidersHorizontal } from 'lucide-react';
+import { Search, MapPin, SlidersHorizontal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { cities, propertyTypes } from '@/data/mockProperties';
+import { cities } from '@/data/mockProperties';
+import PropertyTypeFilter from '@/components/filters/PropertyTypeFilter';
+import PriceRangeFilter from '@/components/filters/PriceRangeFilter';
+
+export interface SearchFilterValues {
+  city: string;
+  types: string[];
+  query: string;
+  priceMin: number;
+  priceMax: number | null;
+}
 
 interface SearchFiltersProps {
-  filters: { city: string; type: string; query: string };
-  onChange: (filters: { city: string; type: string; query: string }) => void;
+  filters: SearchFilterValues;
+  onChange: (filters: SearchFilterValues) => void;
   onSearch: () => void;
   variant?: 'hero' | 'bar';
 }
 
 const SearchFilters = ({ filters, onChange, onSearch, variant = 'bar' }: SearchFiltersProps) => {
-  const isHero = variant === 'hero';
-
   return (
-    <div className={`flex flex-col gap-3 ${isHero ? 'sm:flex-row' : 'sm:flex-row'} rounded-xl border border-border bg-card p-3 shadow-sm`}>
+    <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-3 shadow-sm sm:flex-row sm:flex-wrap sm:items-center">
       {/* Search input */}
-      <div className="flex flex-1 items-center gap-2 rounded-lg border border-border bg-background px-3 py-2">
+      <div className="flex flex-1 min-w-[180px] items-center gap-2 rounded-lg border border-border bg-background px-3 py-2">
         <Search className="h-4 w-4 text-muted-foreground" />
         <input
           type="text"
@@ -41,20 +49,18 @@ const SearchFilters = ({ filters, onChange, onSearch, variant = 'bar' }: SearchF
         </select>
       </div>
 
-      {/* Type select */}
-      <div className="flex items-center gap-2 rounded-lg border border-border bg-background px-3 py-2">
-        <Home className="h-4 w-4 text-muted-foreground" />
-        <select
-          value={filters.type}
-          onChange={(e) => onChange({ ...filters, type: e.target.value })}
-          className="bg-transparent text-sm capitalize outline-none text-foreground"
-        >
-          <option value="">All Types</option>
-          {propertyTypes.map((t) => (
-            <option key={t} value={t} className="capitalize">{t}</option>
-          ))}
-        </select>
-      </div>
+      {/* Property Type multi-select */}
+      <PropertyTypeFilter
+        selected={filters.types}
+        onChange={(types) => onChange({ ...filters, types })}
+      />
+
+      {/* Price Range */}
+      <PriceRangeFilter
+        min={filters.priceMin}
+        max={filters.priceMax}
+        onChange={(priceMin, priceMax) => onChange({ ...filters, priceMin, priceMax })}
+      />
 
       <Button onClick={onSearch} className="gap-2">
         <SlidersHorizontal className="h-4 w-4" /> Search
