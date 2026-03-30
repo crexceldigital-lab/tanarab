@@ -8,6 +8,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 
 import Index from "./pages/Index";
 import Properties from "./pages/Properties";
+import MapSearch from "./pages/MapSearch";
 import PropertyDetail from "./pages/PropertyDetail";
 import Developers from "./pages/Developers";
 import About from "./pages/About";
