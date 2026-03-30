@@ -19,10 +19,12 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-secondary/30 pb-16 pt-12 md:pb-24 md:pt-20">
-      {/* Decorative blobs */}
-      <div className="pointer-events-none absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-primary/5 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-32 -left-32 h-[400px] w-[400px] rounded-full bg-accent/10 blur-3xl" />
+    <section className="relative overflow-hidden pb-16 pt-12 md:pb-24 md:pt-20">
+      {/* Background image */}
+      <div className="absolute inset-0 -z-10">
+        <img src={heroBg} alt="" className="h-full w-full object-cover" width={1920} height={1080} />
+        <div className="absolute inset-0 bg-background/85 backdrop-blur-sm" />
+      </div>
 
       <div className="container relative mx-auto px-4">
         <motion.div
