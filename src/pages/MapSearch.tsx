@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 
 export interface MapFilters {
   query: string;
+  propertyTypes: string[];
   unitType: string;
   status: string;
   priceRange: [number, number];
@@ -19,6 +20,7 @@ export interface MapFilters {
 
 const defaultFilters: MapFilters = {
   query: '',
+  propertyTypes: [],
   unitType: '',
   status: '',
   priceRange: [0, 1000000000],

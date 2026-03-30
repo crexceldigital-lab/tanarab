@@ -1,19 +1,23 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { TrendingUp, Shield, Building, Search, MapPin, Home, DollarSign } from 'lucide-react';
+import { TrendingUp, Shield, Building, Search, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { cities, propertyTypes } from '@/data/mockProperties';
+import { cities } from '@/data/mockProperties';
+import PropertyTypeFilter from '@/components/filters/PropertyTypeFilter';
+import PriceRangeFilter from '@/components/filters/PriceRangeFilter';
 
 const HeroSection = () => {
   const navigate = useNavigate();
-  const [filters, setFilters] = useState({ city: '', type: '', query: '' });
+  const [city, setCity] = useState('');
+  const [types, setTypes] = useState<string[]>([]);
+  const [priceMin, setPriceMin] = useState(0);
+  const [priceMax, setPriceMax] = useState<number | null>(null);
 
   const handleSearch = () => {
     const params = new URLSearchParams();
-    if (filters.city) params.set('city', filters.city);
-    if (filters.type) params.set('type', filters.type);
-    if (filters.query) params.set('q', filters.query);
+    if (city) params.set('city', city);
+    if (types.length > 0) params.set('type', types[0]);
     navigate(`/properties?${params.toString()}`);
   };
 
@@ -48,12 +52,13 @@ const HeroSection = () => {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="mx-auto mt-10 max-w-4xl"
         >
-          <div className="flex flex-col gap-3 rounded-2xl bg-card p-4 shadow-lg sm:flex-row sm:items-center">
-            <div className="flex flex-1 items-center gap-2 rounded-xl border border-border bg-background px-4 py-3">
+          <div className="flex flex-col gap-3 rounded-2xl bg-card p-4 shadow-lg sm:flex-row sm:flex-wrap sm:items-center">
+            {/* City */}
+            <div className="flex flex-1 min-w-[160px] items-center gap-2 rounded-xl border border-border bg-background px-4 py-3">
               <MapPin className="h-4 w-4 text-muted-foreground" />
               <select
-                value={filters.city}
-                onChange={(e) => setFilters({ ...filters, city: e.target.value })}
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
                 className="flex-1 bg-transparent text-sm outline-none text-foreground"
               >
                 <option value="">Location</option>
@@ -63,30 +68,15 @@ const HeroSection = () => {
               </select>
             </div>
 
-            <div className="flex flex-1 items-center gap-2 rounded-xl border border-border bg-background px-4 py-3">
-              <Home className="h-4 w-4 text-muted-foreground" />
-              <select
-                value={filters.type}
-                onChange={(e) => setFilters({ ...filters, type: e.target.value })}
-                className="flex-1 bg-transparent text-sm capitalize outline-none text-foreground"
-              >
-                <option value="">Property Type</option>
-                {propertyTypes.map((t) => (
-                  <option key={t} value={t} className="capitalize">{t}</option>
-                ))}
-              </select>
-            </div>
+            {/* Property Type */}
+            <PropertyTypeFilter selected={types} onChange={setTypes} />
 
-            <div className="flex flex-1 items-center gap-2 rounded-xl border border-border bg-background px-4 py-3">
-              <DollarSign className="h-4 w-4 text-muted-foreground" />
-              <input
-                type="text"
-                placeholder="Budget"
-                value={filters.query}
-                onChange={(e) => setFilters({ ...filters, query: e.target.value })}
-                className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
-              />
-            </div>
+            {/* Price Range */}
+            <PriceRangeFilter
+              min={priceMin}
+              max={priceMax}
+              onChange={(min, max) => { setPriceMin(min); setPriceMax(max); }}
+            />
 
             <Button onClick={handleSearch} size="lg" className="gap-2 rounded-xl px-8">
               <Search className="h-4 w-4" /> Search
