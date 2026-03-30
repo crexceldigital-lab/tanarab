@@ -20,6 +20,7 @@ const Navbar = () => {
 
   const navLinks = [
     { label: 'Properties', to: '/properties' },
+    { label: 'Map Search', to: '/map-search' },
     { label: 'Developers', to: '/developers' },
     { label: 'About', to: '/about' },
   ];
