@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { TrendingUp, Shield, Building } from 'lucide-react';
 import SearchFilters from './SearchFilters';
 import heroBg from '@/assets/hero-bg.jpg';
-import SearchFilters from './SearchFilters';
 
 const HeroSection = () => {
   const navigate = useNavigate();
