@@ -1,25 +1,15 @@
-import { useEffect, useRef, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
 import type { MapProperty } from '@/data/mapProperties';
-import { MapPin, Calendar, Building2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { MapPin, Building2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-// Fix default leaflet icon issue
-delete (L.Icon.Default.prototype as any)._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
-  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
-});
-
 const statusColors: Record<string, string> = {
-  available: '#0d9488',   // primary-ish green
-  'on-sale': '#d97706',   // accent orange
-  upcoming: '#6b7280',    // gray
-  'sold-out': '#9ca3af',  // lighter gray
+  available: '#0d9488',
+  'on-sale': '#d97706',
+  upcoming: '#6b7280',
+  'sold-out': '#9ca3af',
 };
 
 function createPinIcon(status: string, isActive: boolean) {
@@ -38,20 +28,10 @@ function createPinIcon(status: string, isActive: boolean) {
   });
 }
 
-// Component to handle map events
 function MapEventHandler({ onBoundsChange }: { onBoundsChange: (bounds: any) => void }) {
-  const map = useMapEvents({
-    moveend: () => {
-      const b = map.getBounds();
-      onBoundsChange({
-        north: b.getNorth(),
-        south: b.getSouth(),
-        east: b.getEast(),
-        west: b.getWest(),
-      });
-    },
-    zoomend: () => {
-      const b = map.getBounds();
+  useMapEvents({
+    moveend: (e) => {
+      const b = e.target.getBounds();
       onBoundsChange({
         north: b.getNorth(),
         south: b.getSouth(),
@@ -63,7 +43,6 @@ function MapEventHandler({ onBoundsChange }: { onBoundsChange: (bounds: any) => 
   return null;
 }
 
-// Component to fly to active property
 function FlyToActive({ property }: { property: MapProperty | null }) {
   const map = useMap();
   useEffect(() => {
@@ -88,16 +67,14 @@ const MapView = ({ properties, allProperties, activePropertyId, onPinClick, onBo
     [allProperties, activePropertyId]
   );
 
-  // Tanzania center
   const center: [number, number] = [-6.3690, 34.8888];
 
   return (
     <MapContainer
       center={center}
       zoom={6}
-      className="h-full w-full"
       style={{ height: '100%', width: '100%' }}
-      zoomControl={false}
+      zoomControl={true}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -114,30 +91,46 @@ const MapView = ({ properties, allProperties, activePropertyId, onPinClick, onBo
           icon={createPinIcon(p.status, p.id === activePropertyId)}
           eventHandlers={{ click: () => onPinClick(p.id) }}
         >
-          <Popup maxWidth={280} className="property-popup">
-            <div className="min-w-[240px]">
-              <div className="mb-2 aspect-[16/9] overflow-hidden rounded-md bg-muted">
-                <div className="flex h-full items-center justify-center bg-gradient-to-br from-primary/10 to-primary/5">
-                  <Building2 className="h-6 w-6 text-primary/25" />
+          <Popup maxWidth={280}>
+            <div style={{ minWidth: 220 }}>
+              <div style={{ marginBottom: 8, aspectRatio: '16/9', overflow: 'hidden', borderRadius: 8, background: '#f1f5f9' }}>
+                <div style={{ display: 'flex', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+                  <Building2 style={{ width: 24, height: 24, color: '#0d948855' }} />
                 </div>
               </div>
-              <h3 className="font-heading text-sm font-semibold text-foreground">{p.name}</h3>
-              <p className="text-xs text-muted-foreground">{p.developer_name}</p>
-              <p className="mt-1 text-xs text-muted-foreground flex items-center gap-1">
-                <MapPin className="h-3 w-3" /> {p.location}
-              </p>
-              <div className="mt-2 flex items-center justify-between">
-                <span className="font-heading text-sm font-bold text-foreground">{p.price_range}</span>
+              <h3 style={{ fontSize: 14, fontWeight: 600, margin: 0 }}>{p.name}</h3>
+              <p style={{ fontSize: 12, color: '#64748b', margin: '2px 0' }}>{p.developer_name}</p>
+              <p style={{ fontSize: 12, color: '#64748b', margin: '4px 0' }}>📍 {p.location}</p>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 8 }}>
+                <span style={{ fontSize: 14, fontWeight: 700 }}>{p.price_range}</span>
                 <span
-                  className="rounded-full px-2 py-0.5 text-[10px] font-medium capitalize"
-                  style={{ backgroundColor: statusColors[p.status] + '22', color: statusColors[p.status] }}
+                  style={{
+                    fontSize: 10,
+                    fontWeight: 500,
+                    padding: '2px 8px',
+                    borderRadius: 12,
+                    backgroundColor: statusColors[p.status] + '22',
+                    color: statusColors[p.status],
+                    textTransform: 'capitalize',
+                  }}
                 >
                   {p.status.replace('-', ' ')}
                 </span>
               </div>
               <Link
                 to={`/property/${p.id}`}
-                className="mt-2 block rounded-md bg-primary px-3 py-1.5 text-center text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+                style={{
+                  display: 'block',
+                  marginTop: 8,
+                  padding: '6px 12px',
+                  borderRadius: 6,
+                  backgroundColor: '#0d9488',
+                  color: 'white',
+                  textAlign: 'center',
+                  fontSize: 12,
+                  fontWeight: 500,
+                  textDecoration: 'none',
+                }}
               >
                 View Details
               </Link>
