@@ -37,6 +37,7 @@ const App = () => (
             {/* Public */}
             <Route path="/" element={<Index />} />
             <Route path="/properties" element={<Properties />} />
+            <Route path="/map-search" element={<MapSearch />} />
             <Route path="/property/:id" element={<PropertyDetail />} />
             <Route path="/developers" element={<Developers />} />
             <Route path="/about" element={<About />} />

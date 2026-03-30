@@ -100,6 +100,25 @@
   }
 }
 
+/* Leaflet overrides */
+.leaflet-container {
+  font-family: inherit;
+}
+.custom-pin {
+  background: none !important;
+  border: none !important;
+}
+.leaflet-popup-content-wrapper {
+  @apply rounded-xl border border-border bg-card shadow-lg;
+  padding: 0;
+}
+.leaflet-popup-content {
+  margin: 12px;
+}
+.leaflet-popup-tip {
+  @apply bg-card;
+}
+
 @layer utilities {
   .text-gradient {
     @apply bg-clip-text text-transparent;
