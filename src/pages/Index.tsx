@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle, Shield, MessageSquare, CreditCard, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
@@ -16,12 +16,12 @@ const Index = () => (
     <HeroSection />
 
     {/* Featured listings */}
-    <section className="py-16">
+    <section className="py-20">
       <div className="container mx-auto px-4">
-        <div className="mb-8 flex items-end justify-between">
+        <div className="mb-10 flex items-end justify-between">
           <div>
-            <h2 className="font-heading text-2xl font-bold text-foreground md:text-3xl">Featured Properties</h2>
-            <p className="mt-1 text-sm text-muted-foreground">Hand-picked listings from verified developers</p>
+            <h2 className="font-heading text-2xl font-bold text-foreground md:text-3xl">Featured Projects</h2>
+            <p className="mt-2 text-sm text-muted-foreground">Hand-picked listings from verified developers</p>
           </div>
           <Button variant="ghost" className="hidden gap-1 sm:flex" asChild>
             <Link to="/properties">View all <ArrowRight className="h-4 w-4" /></Link>
@@ -32,7 +32,7 @@ const Index = () => (
             <PropertyCard key={p.id} property={p} />
           ))}
         </div>
-        <div className="mt-6 text-center sm:hidden">
+        <div className="mt-8 text-center sm:hidden">
           <Button variant="outline" asChild>
             <Link to="/properties">View all properties</Link>
           </Button>
@@ -40,42 +40,80 @@ const Index = () => (
       </div>
     </section>
 
-    {/* Why choose us */}
-    <section className="border-t border-border bg-muted/30 py-16">
+    {/* Map Preview Section */}
+    <section className="bg-muted py-20">
       <div className="container mx-auto px-4">
-        <h2 className="mb-10 text-center font-heading text-2xl font-bold text-foreground md:text-3xl">Why Choose PropTZ</h2>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid items-center gap-12 lg:grid-cols-2">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="font-heading text-2xl font-bold text-foreground md:text-3xl">
+              Explore Properties on the Map
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              Browse property locations across Tanzania interactively. Find projects near your preferred neighborhoods, schools, and amenities.
+            </p>
+            <Button size="lg" className="mt-6 gap-2" asChild>
+              <Link to="/map-search"><MapPin className="h-4 w-4" /> Explore on Map</Link>
+            </Button>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="overflow-hidden rounded-2xl border border-border bg-card shadow-lg"
+          >
+            <div className="aspect-video bg-muted flex items-center justify-center">
+              <div className="text-center">
+                <MapPin className="mx-auto h-12 w-12 text-primary" />
+                <p className="mt-2 text-sm text-muted-foreground">Interactive Map Preview</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+
+    {/* Why choose us */}
+    <section className="py-20">
+      <div className="container mx-auto px-4">
+        <h2 className="mb-12 text-center font-heading text-2xl font-bold text-foreground md:text-3xl">Why Choose PropTZ</h2>
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {[
-            { title: 'Verified Developers', desc: 'Every developer goes through a strict verification process to ensure trust and transparency.' },
-            { title: 'Direct Communication', desc: 'Chat directly with developers via WhatsApp or in-app messaging — no middlemen.' },
-            { title: 'Payment Plans', desc: 'Flexible payment options including mobile money (M-Pesa, Airtel Money) and bank transfers.' },
+            { icon: Shield, title: 'Verified Developers', desc: 'Every developer goes through a strict verification process to ensure trust and transparency.' },
+            { icon: MessageSquare, title: 'Direct Communication', desc: 'Chat directly with developers via WhatsApp or in-app messaging — no middlemen.' },
+            { icon: CreditCard, title: 'Payment Plans', desc: 'Flexible payment options including mobile money (M-Pesa, Airtel Money) and bank transfers.' },
           ].map((item) => (
             <motion.div
               key={item.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="rounded-xl border border-border bg-card p-6 card-elevated"
+              className="rounded-2xl border border-border bg-card p-8 card-elevated"
             >
-              <CheckCircle className="mb-3 h-6 w-6 text-primary" />
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-secondary">
+                <item.icon className="h-6 w-6 text-secondary-foreground" />
+              </div>
               <h3 className="mb-2 font-heading text-lg font-semibold text-foreground">{item.title}</h3>
-              <p className="text-sm text-muted-foreground">{item.desc}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
             </motion.div>
           ))}
         </div>
       </div>
     </section>
 
-    {/* CTA */}
-    <section className="py-16">
+    {/* Developer CTA */}
+    <section className="py-20">
       <div className="container mx-auto px-4">
-        <div className="rounded-2xl bg-primary p-8 text-center text-primary-foreground md:p-14">
-          <h2 className="font-heading text-2xl font-bold md:text-3xl">Are You a Developer?</h2>
-          <p className="mx-auto mt-3 max-w-xl text-sm opacity-90">
+        <div className="rounded-3xl bg-secondary p-10 text-center md:p-16">
+          <h2 className="font-heading text-2xl font-bold text-secondary-foreground md:text-3xl">Are You a Developer?</h2>
+          <p className="mx-auto mt-4 max-w-xl text-sm text-secondary-foreground/70">
             Showcase your projects to thousands of buyers and investors across Tanzania. Get verified and start generating leads today.
           </p>
-          <Button size="lg" variant="secondary" className="mt-6" asChild>
-            <Link to="/developers">Get Started</Link>
+          <Button size="lg" className="mt-8" asChild>
+            <Link to="/developers">List Your Project</Link>
           </Button>
         </div>
       </div>
