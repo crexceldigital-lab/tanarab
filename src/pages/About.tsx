@@ -39,7 +39,7 @@ const About = () => (
           transition={{ delay: 0.1 }}
           className="mx-auto mt-4 max-w-2xl text-muted-foreground"
         >
-          PropTZ connects property buyers, investors, and verified developers across Tanzania — bringing transparency, trust, and modern technology to one of Africa's most dynamic real estate markets.
+          TANARAB connects property buyers, investors, and verified developers across Tanzania — bringing transparency, trust, and modern technology to one of Africa's most dynamic real estate markets.
         </motion.p>
       </div>
     </section>
@@ -65,10 +65,10 @@ const About = () => (
             Tanzania's real estate market is booming, yet finding verified properties and trustworthy developers remains a challenge for many buyers. Scattered listings across social media, lack of standardized information, and limited transparency create friction at every step of the property journey.
           </p>
           <p>
-            PropTZ was created to solve this. We provide a centralized marketplace where every listing is verified, every developer is vetted, and every buyer has access to the information they need — from floor plans and payment schedules to project completion timelines and Google Maps locations.
+            TANARAB was created to solve this. We provide a centralized marketplace where every listing is verified, every developer is vetted, and every buyer has access to the information they need — from floor plans and payment schedules to project completion timelines and Google Maps locations.
           </p>
           <p>
-            Whether you're looking for a modern apartment in Dar es Salaam's Masaki peninsula, a family home in Dodoma, commercial space in Arusha, or an off-plan investment in Kigamboni's waterfront developments, PropTZ gives you the tools to search, compare, and connect directly with developers — no middlemen, no surprises.
+            Whether you're looking for a modern apartment in Dar es Salaam's Masaki peninsula, a family home in Dodoma, commercial space in Arusha, or an off-plan investment in Kigamboni's waterfront developments, TANARAB gives you the tools to search, compare, and connect directly with developers — no middlemen, no surprises.
           </p>
         </div>
       </div>
@@ -109,7 +109,7 @@ const About = () => (
             Key infrastructure projects — including the Standard Gauge Railway (SGR), the Julius Nyerere Hydropower Project, and major road expansions — are opening up new corridors for property development. Areas like Kigamboni, Bagamoyo Road, and Kibaha are seeing increased developer activity as accessibility improves.
           </p>
           <p>
-            The government's push toward a formal property registration system and digital land management is further boosting investor confidence. PropTZ is positioning itself at the intersection of these trends, providing the digital infrastructure that Tanzania's evolving property market needs.
+            The government's push toward a formal property registration system and digital land management is further boosting investor confidence. TANARAB is positioning itself at the intersection of these trends, providing the digital infrastructure that Tanzania's evolving property market needs.
           </p>
         </div>
       </div>

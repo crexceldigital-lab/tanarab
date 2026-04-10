@@ -34,7 +34,7 @@ const Navbar = () => {
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-secondary">
             <Building2 className="h-5 w-5 text-secondary-foreground" />
           </div>
-          <span className="font-heading text-xl font-bold text-foreground">PropTZ</span>
+          <span className="font-heading text-xl font-bold tracking-tight text-foreground">TANA<span className="text-primary">RAB</span></span>
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">

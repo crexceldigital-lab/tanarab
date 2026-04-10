@@ -48,7 +48,7 @@ const Login = () => {
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-foreground/20">
               <Building2 className="h-7 w-7" />
             </div>
-            <span className="font-heading text-3xl font-bold">PropTZ</span>
+            <span className="font-heading text-3xl font-bold">TANARAB</span>
           </div>
           <h1 className="font-heading text-4xl font-bold leading-tight">
             Find Your Perfect Property in Tanzania
@@ -71,7 +71,7 @@ const Login = () => {
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
                 <Building2 className="h-5 w-5 text-primary-foreground" />
               </div>
-              <span className="font-heading text-xl font-bold text-foreground">PropTZ</span>
+              <span className="font-heading text-xl font-bold text-foreground">TANARAB</span>
             </Link>
             <h2 className="font-heading text-2xl font-bold text-foreground">Welcome back</h2>
             <p className="mt-1 text-sm text-muted-foreground">Sign in to your account to continue</p>
