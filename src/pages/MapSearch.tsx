@@ -134,6 +134,9 @@ const MapSearch = () => {
               onPinClick={handlePinClick}
               onBoundsChange={handleBoundsChange}
             />
+            <div className="absolute bottom-4 left-4 right-4 z-[500] max-h-[40%] overflow-y-auto rounded-xl border border-border bg-card/95 p-4 shadow-lg backdrop-blur-sm sm:left-auto sm:max-w-sm">
+              <ScanAreaPanel />
+            </div>
           </div>
         )}
       </div>
