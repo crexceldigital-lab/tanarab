@@ -41,7 +41,7 @@ const DashboardLayout = ({ children, title, navItems }: Props) => {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
               <Building2 className="h-4 w-4 text-primary-foreground" />
             </div>
-            <span className="font-heading text-lg font-bold text-foreground">PropTZ</span>
+            <span className="font-heading text-lg font-bold text-foreground">TANARAB</span>
           </Link>
         </div>
         <nav className="flex flex-col gap-1 p-4">

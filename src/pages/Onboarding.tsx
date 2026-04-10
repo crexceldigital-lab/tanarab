@@ -36,7 +36,7 @@ const Onboarding = () => {
       verification_status: selected === 'user' ? 'approved' : 'pending',
     });
     if (error) { toast.error(error.message); setSaving(false); return; }
-    toast.success('Welcome to PropTZ!');
+    toast.success('Welcome to TANARAB!');
     navigate('/dashboard');
   };
 
