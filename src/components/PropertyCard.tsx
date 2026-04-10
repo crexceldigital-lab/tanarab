@@ -3,6 +3,7 @@ import { MapPin, Bed, Bath, Maximize, BadgeCheck, MessageCircle } from 'lucide-r
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import type { Property } from '@/data/mockProperties';
+import { getPropertyMainImage } from '@/data/propertyImages';
 import { motion } from 'framer-motion';
 
 const statusColor: Record<string, string> = {
@@ -13,6 +14,7 @@ const statusColor: Record<string, string> = {
 
 const PropertyCard = ({ property }: { property: Property }) => {
   const whatsappUrl = `https://wa.me/255700000000?text=${encodeURIComponent(`Hi, I'm interested in ${property.title}`)}`;
+  const mainImage = getPropertyMainImage(property.id);
 
   return (
     <motion.div
@@ -22,11 +24,16 @@ const PropertyCard = ({ property }: { property: Property }) => {
       transition={{ duration: 0.4 }}
       className="card-elevated group overflow-hidden rounded-xl border border-border bg-card"
     >
-      {/* Image placeholder */}
+      {/* Image */}
       <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-        <div className="flex h-full items-center justify-center bg-gradient-to-br from-primary/10 to-primary/5">
-          <Building2Icon className="h-12 w-12 text-primary/30" />
-        </div>
+        <img
+          src={mainImage}
+          alt={property.title}
+          loading="lazy"
+          width={800}
+          height={600}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+        />
         <div className="absolute left-3 top-3 flex gap-2">
           <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${statusColor[property.status]}`}>
             {property.status.replace('-', ' ')}
@@ -83,13 +90,5 @@ const PropertyCard = ({ property }: { property: Property }) => {
     </motion.div>
   );
 };
-
-function Building2Icon({ className }: { className?: string }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <rect width="16" height="20" x="4" y="2" rx="2" ry="2" /><path d="M9 22v-4h6v4" /><path d="M8 6h.01" /><path d="M16 6h.01" /><path d="M12 6h.01" /><path d="M12 10h.01" /><path d="M12 14h.01" /><path d="M16 10h.01" /><path d="M16 14h.01" /><path d="M8 10h.01" /><path d="M8 14h.01" />
-    </svg>
-  );
-}
 
 export default PropertyCard;

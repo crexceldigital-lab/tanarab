@@ -1,14 +1,17 @@
+import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { MapPin, Bed, Bath, Maximize, BadgeCheck, MessageCircle, Phone, CalendarCheck, ArrowLeft, Building2 } from 'lucide-react';
+import { MapPin, Bed, Bath, Maximize, BadgeCheck, MessageCircle, Phone, CalendarCheck, ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { properties } from '@/data/mockProperties';
+import { getPropertyGallery } from '@/data/propertyImages';
 
 const PropertyDetail = () => {
   const { id } = useParams();
   const property = properties.find((p) => p.id === id);
+  const [activeImage, setActiveImage] = useState(0);
 
   if (!property) {
     return (
@@ -23,7 +26,11 @@ const PropertyDetail = () => {
     );
   }
 
+  const gallery = getPropertyGallery(property.id);
   const whatsappUrl = `https://wa.me/255700000000?text=${encodeURIComponent(`Hi, I'm interested in ${property.title}`)}`;
+
+  const nextImage = () => setActiveImage((prev) => (prev + 1) % gallery.length);
+  const prevImage = () => setActiveImage((prev) => (prev - 1 + gallery.length) % gallery.length);
 
   return (
     <div className="min-h-screen bg-background">
@@ -36,11 +43,52 @@ const PropertyDetail = () => {
         <div className="grid gap-8 lg:grid-cols-3">
           {/* Main content */}
           <div className="lg:col-span-2">
-            {/* Image */}
-            <div className="mb-6 aspect-video overflow-hidden rounded-xl bg-gradient-to-br from-primary/10 to-primary/5">
-              <div className="flex h-full items-center justify-center">
-                <Building2 className="h-20 w-20 text-primary/20" />
+            {/* Image Gallery */}
+            <div className="mb-4">
+              <div className="relative aspect-video overflow-hidden rounded-xl bg-muted">
+                <img
+                  src={gallery[activeImage]}
+                  alt={`${property.title} - Image ${activeImage + 1}`}
+                  width={800}
+                  height={600}
+                  className="h-full w-full object-cover"
+                />
+                {gallery.length > 1 && (
+                  <>
+                    <button
+                      onClick={prevImage}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur-sm transition-colors hover:bg-background"
+                    >
+                      <ChevronLeft className="h-5 w-5" />
+                    </button>
+                    <button
+                      onClick={nextImage}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur-sm transition-colors hover:bg-background"
+                    >
+                      <ChevronRight className="h-5 w-5" />
+                    </button>
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-background/80 px-3 py-1 text-xs font-medium text-foreground backdrop-blur-sm">
+                      {activeImage + 1} / {gallery.length}
+                    </div>
+                  </>
+                )}
               </div>
+              {/* Thumbnails */}
+              {gallery.length > 1 && (
+                <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
+                  {gallery.map((img, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActiveImage(i)}
+                      className={`flex-shrink-0 overflow-hidden rounded-lg border-2 transition-all ${
+                        i === activeImage ? 'border-primary ring-1 ring-primary' : 'border-transparent opacity-70 hover:opacity-100'
+                      }`}
+                    >
+                      <img src={img} alt={`Thumbnail ${i + 1}`} loading="lazy" width={96} height={72} className="h-16 w-20 object-cover" />
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div className="mb-4 flex flex-wrap items-center gap-2">
