@@ -64,6 +64,10 @@ const App = () => (
               <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
               <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
               <Route path="/buyer/dashboard" element={<ProtectedRoute requiredRole="user"><BuyerDashboard /></ProtectedRoute>} />
+              <Route path="/buyer/bookings" element={<ProtectedRoute requiredRole="user"><MyBookings /></ProtectedRoute>} />
+              <Route path="/buyer/chats" element={<ProtectedRoute requiredRole="user"><MyChats /></ProtectedRoute>} />
+              <Route path="/buyer/transactions" element={<ProtectedRoute requiredRole="user"><MyTransactions /></ProtectedRoute>} />
+              <Route path="/buyer/installments" element={<ProtectedRoute requiredRole="user"><MyInstallments /></ProtectedRoute>} />
               <Route path="/buyer/*" element={<ProtectedRoute requiredRole="user"><BuyerDashboard /></ProtectedRoute>} />
               <Route path="/owner/dashboard" element={<ProtectedRoute requiredRole="owner"><OwnerDashboard /></ProtectedRoute>} />
               <Route path="/owner/*" element={<ProtectedRoute requiredRole="owner"><OwnerDashboard /></ProtectedRoute>} />
@@ -73,6 +77,9 @@ const App = () => (
               <Route path="/admin/users" element={<ProtectedRoute requiredRole="admin"><AdminUsers /></ProtectedRoute>} />
               <Route path="/admin/listings" element={<ProtectedRoute requiredRole="admin"><AdminListings /></ProtectedRoute>} />
               <Route path="/admin/verifications" element={<ProtectedRoute requiredRole="admin"><AdminVerifications /></ProtectedRoute>} />
+              <Route path="/admin/bookings" element={<ProtectedRoute requiredRole="admin"><AdminBookings /></ProtectedRoute>} />
+              <Route path="/admin/transactions" element={<ProtectedRoute requiredRole="admin"><AdminTransactions /></ProtectedRoute>} />
+              <Route path="/admin/reports" element={<ProtectedRoute requiredRole="admin"><AdminReports /></ProtectedRoute>} />
               <Route path="/admin/*" element={<ProtectedRoute requiredRole="admin"><AdminDashboard /></ProtectedRoute>} />
 
               <Route path="*" element={<NotFound />} />
