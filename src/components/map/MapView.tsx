@@ -7,24 +7,45 @@ import { Link } from 'react-router-dom';
 
 const statusColors: Record<string, string> = {
   available: '#0d9488',
-  'on-sale': '#d97706',
-  upcoming: '#6b7280',
+  'on-sale': '#ef4444',
+  upcoming: '#8b5cf6',
   'sold-out': '#9ca3af',
 };
 
-function createPinIcon(status: string, isActive: boolean) {
-  const color = statusColors[status] || '#0d9488';
-  const size = isActive ? 36 : 28;
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="${color}" stroke="white" stroke-width="1.5">
-    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
-    <circle cx="12" cy="10" r="3" fill="white"/>
-  </svg>`;
+function createPricePinIcon(property: MapProperty, isActive: boolean) {
+  const color = statusColors[property.status] || '#0d9488';
+  const priceLabel = property.price_min >= 1_000_000_000
+    ? `${(property.price_min / 1_000_000_000).toFixed(1)}B`
+    : `${(property.price_min / 1_000_000).toFixed(0)}M`;
+  
+  const scale = isActive ? 1.15 : 1;
+  const shadow = isActive ? 'box-shadow: 0 4px 14px -2px rgba(0,0,0,0.3);' : 'box-shadow: 0 2px 8px -2px rgba(0,0,0,0.2);';
+  const border = isActive ? `border: 2.5px solid ${color};` : 'border: 2px solid white;';
+  
+  const html = `
+    <div style="
+      background: white;
+      color: ${color};
+      font-weight: 700;
+      font-size: 11px;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+      ${border}
+      ${shadow}
+      transform: scale(${scale});
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    ">${priceLabel}</div>
+  `;
+  
   return L.divIcon({
-    html: svg,
-    className: 'custom-pin',
-    iconSize: [size, size],
-    iconAnchor: [size / 2, size],
-    popupAnchor: [0, -size],
+    html,
+    className: 'price-pin',
+    iconSize: [60, 30],
+    iconAnchor: [30, 15],
+    popupAnchor: [0, -20],
   });
 }
 
@@ -74,11 +95,12 @@ const MapView = ({ properties, allProperties, activePropertyId, onPinClick, onBo
       center={center}
       zoom={6}
       style={{ height: '100%', width: '100%' }}
-      zoomControl={true}
+      zoomControl={false}
     >
+      {/* Clean, light map tiles */}
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
+        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
       />
 
       <MapEventHandler onBoundsChange={onBoundsChange} />
@@ -88,47 +110,29 @@ const MapView = ({ properties, allProperties, activePropertyId, onPinClick, onBo
         <Marker
           key={p.id}
           position={[p.latitude, p.longitude]}
-          icon={createPinIcon(p.status, p.id === activePropertyId)}
+          icon={createPricePinIcon(p, p.id === activePropertyId)}
           eventHandlers={{ click: () => onPinClick(p.id) }}
         >
-          <Popup maxWidth={280}>
-            <div style={{ minWidth: 220 }}>
-              <div style={{ marginBottom: 8, aspectRatio: '16/9', overflow: 'hidden', borderRadius: 8, background: '#f1f5f9' }}>
-                <div style={{ display: 'flex', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
-                  <Building2 style={{ width: 24, height: 24, color: '#0d948855' }} />
-                </div>
-              </div>
-              <h3 style={{ fontSize: 14, fontWeight: 600, margin: 0 }}>{p.name}</h3>
-              <p style={{ fontSize: 12, color: '#64748b', margin: '2px 0' }}>{p.developer_name}</p>
+          <Popup maxWidth={260}>
+            <div style={{ minWidth: 200 }}>
+              <h3 style={{ fontSize: 14, fontWeight: 600, margin: '0 0 4px' }}>{p.name}</h3>
+              <p style={{ fontSize: 12, color: '#64748b', margin: 0 }}>{p.developer_name}</p>
               <p style={{ fontSize: 12, color: '#64748b', margin: '4px 0' }}>📍 {p.location}</p>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 8 }}>
                 <span style={{ fontSize: 14, fontWeight: 700 }}>{p.price_range}</span>
-                <span
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 500,
-                    padding: '2px 8px',
-                    borderRadius: 12,
-                    backgroundColor: statusColors[p.status] + '22',
-                    color: statusColors[p.status],
-                    textTransform: 'capitalize',
-                  }}
-                >
-                  {p.status.replace('-', ' ')}
-                </span>
               </div>
               <Link
                 to={`/property/${p.id}`}
                 style={{
                   display: 'block',
                   marginTop: 8,
-                  padding: '6px 12px',
-                  borderRadius: 6,
+                  padding: '8px 12px',
+                  borderRadius: 10,
                   backgroundColor: '#0d9488',
                   color: 'white',
                   textAlign: 'center',
                   fontSize: 12,
-                  fontWeight: 500,
+                  fontWeight: 600,
                   textDecoration: 'none',
                 }}
               >
