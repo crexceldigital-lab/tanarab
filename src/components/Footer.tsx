@@ -31,7 +31,7 @@ const Footer = () => (
         <div>
           <h4 className="mb-3 font-heading text-sm font-semibold">Contact</h4>
           <div className="flex flex-col gap-2 text-sm text-background/60">
-            <span>info@proptz.co.tz</span>
+            <span>info@tanarab.co.tz</span>
             <span>+255 700 000 000</span>
           </div>
         </div>
