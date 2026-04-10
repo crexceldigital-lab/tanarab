@@ -5,8 +5,9 @@ import MapPropertyList from '@/components/map/MapPropertyList';
 import MapView from '@/components/map/MapView';
 import { mapProperties, type MapProperty } from '@/data/mapProperties';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { Map, List } from 'lucide-react';
+import { Map, List, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import ScanAreaPanel from '@/components/ScanAreaPanel';
 
 export interface MapFilters {
   query: string;
