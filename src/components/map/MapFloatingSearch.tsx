@@ -20,7 +20,7 @@ const MapFloatingSearch = ({ query, onQueryChange }: Props) => {
       <div className="flex items-center gap-2">
         {/* Back button */}
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => (window.history.length > 1 ? navigate(-1) : navigate('/'))}
           className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card/95 shadow-md backdrop-blur-xl transition-transform active:scale-95"
         >
           <ArrowLeft className="h-5 w-5 text-foreground" />
