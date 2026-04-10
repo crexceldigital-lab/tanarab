@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { MapPin, Bed, Bath, Maximize, BadgeCheck, MessageCircle, Phone, CalendarCheck, ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
+import { MapPin, Bed, Bath, Maximize, BadgeCheck, MessageCircle, Phone, ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { properties } from '@/data/mockProperties';
 import { getPropertyGallery } from '@/data/propertyImages';
+import BookVisitDialog from '@/components/BookVisitDialog';
+import ChatDialog from '@/components/ChatDialog';
+import ReportListingDialog from '@/components/ReportListingDialog';
 
 const PropertyDetail = () => {
   const { id } = useParams();
@@ -36,9 +39,12 @@ const PropertyDetail = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <div className="container mx-auto px-4 py-6">
-        <Link to="/properties" className="mb-4 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
-          <ArrowLeft className="h-4 w-4" /> Back to listings
-        </Link>
+        <div className="mb-4 flex items-center justify-between">
+          <Link to="/properties" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
+            <ArrowLeft className="h-4 w-4" /> Back to listings
+          </Link>
+          <ReportListingDialog propertyId={property.id} propertyTitle={property.title} />
+        </div>
 
         <div className="grid gap-8 lg:grid-cols-3">
           {/* Main content */}
@@ -73,7 +79,6 @@ const PropertyDetail = () => {
                   </>
                 )}
               </div>
-              {/* Thumbnails */}
               {gallery.length > 1 && (
                 <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
                   {gallery.map((img, i) => (
@@ -146,12 +151,11 @@ const PropertyDetail = () => {
                 )}
 
                 <div className="mt-6 flex flex-col gap-3">
-                  <Button className="w-full gap-2">
-                    <CalendarCheck className="h-4 w-4" /> Book Site Visit
-                  </Button>
+                  <BookVisitDialog propertyId={property.id} propertyTitle={property.title} />
                   <Button variant="outline" className="w-full gap-2">
                     <Phone className="h-4 w-4" /> Request Info
                   </Button>
+                  <ChatDialog propertyId={property.id} propertyTitle={property.title} />
                   <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
                     <Button variant="outline" className="w-full gap-2 border-success text-success hover:bg-success hover:text-success-foreground">
                       <MessageCircle className="h-4 w-4" /> WhatsApp
