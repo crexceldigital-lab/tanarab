@@ -79,7 +79,7 @@ const Index = () => (
     {/* Why choose us */}
     <section className="py-20">
       <div className="container mx-auto px-4">
-        <h2 className="mb-12 text-center font-heading text-2xl font-bold text-foreground md:text-3xl">Why Choose PropTZ</h2>
+        <h2 className="mb-12 text-center font-heading text-2xl font-bold text-foreground md:text-3xl">Why Choose TANARAB</h2>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {[
             { icon: Shield, title: 'Verified Developers', desc: 'Every developer goes through a strict verification process to ensure trust and transparency.' },
