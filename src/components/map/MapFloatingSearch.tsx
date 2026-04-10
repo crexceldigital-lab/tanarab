@@ -33,7 +33,7 @@ const MapFloatingSearch = ({ query, onQueryChange }: Props) => {
             type="text"
             value={query}
             onChange={(e) => onQueryChange(e.target.value)}
-            placeholder="Search location, project, or keyword…"
+            placeholder="Search project, developer, or area…"
             className="flex-1 bg-transparent text-sm font-medium text-foreground outline-none placeholder:text-muted-foreground/70"
           />
           {query && (

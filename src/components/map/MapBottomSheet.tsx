@@ -80,9 +80,9 @@ const MapBottomSheet = ({ properties, activePropertyId, onPropertyClick, expande
       <div className="flex items-center justify-between px-5 pb-3">
         <div>
           <h3 className="font-heading text-base font-bold text-foreground">
-            {properties.length} {properties.length === 1 ? 'home' : 'homes'} in {cityName}
+            {properties.length} {properties.length === 1 ? 'project' : 'projects'} in {cityName}
           </h3>
-          <p className="text-xs text-muted-foreground mt-0.5">Explore properties near you</p>
+          <p className="text-xs text-muted-foreground mt-0.5">Explore developments near you</p>
         </div>
         <button
           onClick={() => onExpandedChange(!expanded)}
@@ -101,7 +101,7 @@ const MapBottomSheet = ({ properties, activePropertyId, onPropertyClick, expande
           {properties.length === 0 && (
             <div className="flex w-full flex-col items-center py-6 text-center">
               <MapPin className="mb-2 h-8 w-8 text-muted-foreground/30" />
-              <p className="text-sm text-muted-foreground">No properties found</p>
+              <p className="text-sm text-muted-foreground">No projects found</p>
             </div>
           )}
         </div>
@@ -117,7 +117,7 @@ const MapBottomSheet = ({ properties, activePropertyId, onPropertyClick, expande
             {properties.length === 0 && (
               <div className="flex flex-col items-center py-12 text-center">
                 <MapPin className="mb-3 h-10 w-10 text-muted-foreground/30" />
-                <p className="font-medium text-foreground">No properties in this area</p>
+                <p className="font-medium text-foreground">No projects in this area</p>
                 <p className="mt-1 text-sm text-muted-foreground">Try zooming out or adjusting filters</p>
               </div>
             )}
