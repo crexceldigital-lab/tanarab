@@ -92,5 +92,3 @@ const PropertyCard = ({ property }: { property: Property }) => {
 };
 
 export default PropertyCard;
-
-export default PropertyCard;
