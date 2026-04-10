@@ -101,7 +101,7 @@ const MapBottomSheet = ({ properties, activePropertyId, onPropertyClick, expande
           {properties.length === 0 && (
             <div className="flex w-full flex-col items-center py-6 text-center">
               <MapPin className="mb-2 h-8 w-8 text-muted-foreground/30" />
-              <p className="text-sm text-muted-foreground">No properties found</p>
+              <p className="text-sm text-muted-foreground">No projects found</p>
             </div>
           )}
         </div>
@@ -117,7 +117,7 @@ const MapBottomSheet = ({ properties, activePropertyId, onPropertyClick, expande
             {properties.length === 0 && (
               <div className="flex flex-col items-center py-12 text-center">
                 <MapPin className="mb-3 h-10 w-10 text-muted-foreground/30" />
-                <p className="font-medium text-foreground">No properties in this area</p>
+                <p className="font-medium text-foreground">No projects in this area</p>
                 <p className="mt-1 text-sm text-muted-foreground">Try zooming out or adjusting filters</p>
               </div>
             )}
