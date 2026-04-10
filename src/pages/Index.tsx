@@ -56,7 +56,7 @@ const Index = () => (
               Browse property locations across Tanzania interactively. Find projects near your preferred neighborhoods, schools, and amenities.
             </p>
             <Button size="lg" className="mt-6 gap-2" asChild>
-              <Link to="/map-search"><MapPin className="h-4 w-4" /> Explore on Map</Link>
+              <Link to="/projects"><MapPin className="h-4 w-4" /> Explore on Map</Link>
             </Button>
           </motion.div>
           <motion.div
