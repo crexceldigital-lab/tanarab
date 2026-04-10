@@ -80,9 +80,9 @@ const MapBottomSheet = ({ properties, activePropertyId, onPropertyClick, expande
       <div className="flex items-center justify-between px-5 pb-3">
         <div>
           <h3 className="font-heading text-base font-bold text-foreground">
-            {properties.length} {properties.length === 1 ? 'home' : 'homes'} in {cityName}
+            {properties.length} {properties.length === 1 ? 'project' : 'projects'} in {cityName}
           </h3>
-          <p className="text-xs text-muted-foreground mt-0.5">Explore properties near you</p>
+          <p className="text-xs text-muted-foreground mt-0.5">Explore developments near you</p>
         </div>
         <button
           onClick={() => onExpandedChange(!expanded)}
