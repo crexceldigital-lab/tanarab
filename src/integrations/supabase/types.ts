@@ -14,6 +14,160 @@ export type Database = {
   }
   public: {
     Tables: {
+      agent_verifications: {
+        Row: {
+          agent_id: string
+          created_at: string
+          document_type: string
+          document_url: string | null
+          id: string
+          notes: string | null
+          updated_at: string
+          verification_status: string
+          verified_by: string | null
+        }
+        Insert: {
+          agent_id: string
+          created_at?: string
+          document_type: string
+          document_url?: string | null
+          id?: string
+          notes?: string | null
+          updated_at?: string
+          verification_status?: string
+          verified_by?: string | null
+        }
+        Update: {
+          agent_id?: string
+          created_at?: string
+          document_type?: string
+          document_url?: string | null
+          id?: string
+          notes?: string | null
+          updated_at?: string
+          verification_status?: string
+          verified_by?: string | null
+        }
+        Relationships: []
+      }
+      conversations: {
+        Row: {
+          created_at: string
+          id: string
+          last_message_at: string | null
+          participant_one: string
+          participant_two: string
+          property_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          last_message_at?: string | null
+          participant_one: string
+          participant_two: string
+          property_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          last_message_at?: string | null
+          participant_one?: string
+          participant_two?: string
+          property_id?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      installments: {
+        Row: {
+          amount: number
+          created_at: string
+          due_date: string
+          id: string
+          installment_number: number
+          paid_date: string | null
+          property_id: string
+          status: string
+          total_installments: number
+          transaction_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          due_date: string
+          id?: string
+          installment_number: number
+          paid_date?: string | null
+          property_id: string
+          status?: string
+          total_installments: number
+          transaction_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          due_date?: string
+          id?: string
+          installment_number?: number
+          paid_date?: string | null
+          property_id?: string
+          status?: string
+          total_installments?: number
+          transaction_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "installments_transaction_id_fkey"
+            columns: ["transaction_id"]
+            isOneToOne: false
+            referencedRelation: "transactions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messages: {
+        Row: {
+          content: string
+          conversation_id: string
+          created_at: string
+          id: string
+          is_read: boolean
+          sender_id: string
+        }
+        Insert: {
+          content: string
+          conversation_id: string
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          sender_id: string
+        }
+        Update: {
+          content?: string
+          conversation_id?: string
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          sender_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -42,6 +196,165 @@ export type Database = {
           full_name?: string | null
           id?: string
           phone?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      property_reports: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          property_id: string
+          reason: string
+          reporter_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          property_id: string
+          reason: string
+          reporter_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          property_id?: string
+          reason?: string
+          reporter_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      property_verifications: {
+        Row: {
+          created_at: string
+          document_url: string | null
+          fraud_flag: boolean
+          fraud_reason: string | null
+          id: string
+          notes: string | null
+          property_id: string
+          submitted_by: string
+          updated_at: string
+          verification_status: string
+          verified_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          document_url?: string | null
+          fraud_flag?: boolean
+          fraud_reason?: string | null
+          id?: string
+          notes?: string | null
+          property_id: string
+          submitted_by: string
+          updated_at?: string
+          verification_status?: string
+          verified_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          document_url?: string | null
+          fraud_flag?: boolean
+          fraud_reason?: string | null
+          id?: string
+          notes?: string | null
+          property_id?: string
+          submitted_by?: string
+          updated_at?: string
+          verification_status?: string
+          verified_by?: string | null
+        }
+        Relationships: []
+      }
+      property_visits: {
+        Row: {
+          agent_id: string | null
+          created_at: string
+          id: string
+          notes: string | null
+          property_id: string
+          status: string
+          time_slot: string
+          updated_at: string
+          visit_date: string
+          visitor_id: string
+        }
+        Insert: {
+          agent_id?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          property_id: string
+          status?: string
+          time_slot: string
+          updated_at?: string
+          visit_date: string
+          visitor_id: string
+        }
+        Update: {
+          agent_id?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          property_id?: string
+          status?: string
+          time_slot?: string
+          updated_at?: string
+          visit_date?: string
+          visitor_id?: string
+        }
+        Relationships: []
+      }
+      transactions: {
+        Row: {
+          amount: number
+          created_at: string
+          currency: string
+          escrow_status: string | null
+          id: string
+          notes: string | null
+          payment_type: string
+          property_id: string | null
+          reference: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          currency?: string
+          escrow_status?: string | null
+          id?: string
+          notes?: string | null
+          payment_type: string
+          property_id?: string | null
+          reference?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          currency?: string
+          escrow_status?: string | null
+          id?: string
+          notes?: string | null
+          payment_type?: string
+          property_id?: string | null
+          reference?: string | null
+          status?: string
           updated_at?: string
           user_id?: string
         }

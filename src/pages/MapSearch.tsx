@@ -5,8 +5,9 @@ import MapPropertyList from '@/components/map/MapPropertyList';
 import MapView from '@/components/map/MapView';
 import { mapProperties, type MapProperty } from '@/data/mapProperties';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { Map, List } from 'lucide-react';
+import { Map, List, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import ScanAreaPanel from '@/components/ScanAreaPanel';
 
 export interface MapFilters {
   query: string;
@@ -133,6 +134,9 @@ const MapSearch = () => {
               onPinClick={handlePinClick}
               onBoundsChange={handleBoundsChange}
             />
+            <div className="absolute bottom-4 left-4 right-4 z-[500] max-h-[40%] overflow-y-auto rounded-xl border border-border bg-card/95 p-4 shadow-lg backdrop-blur-sm sm:left-auto sm:max-w-sm">
+              <ScanAreaPanel />
+            </div>
           </div>
         )}
       </div>

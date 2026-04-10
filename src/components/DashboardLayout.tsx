@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { Building2, LogOut, User, Home, BarChart3, FileText, Settings, Users, Shield, Bell } from 'lucide-react';
+import { Building2, LogOut, User, Home, BarChart3, FileText, Settings, Users, Shield, Bell, CalendarCheck, CreditCard, Receipt, MessageCircle, Flag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -95,7 +95,10 @@ export default DashboardLayout;
 export const buyerNav: NavItem[] = [
   { label: 'Overview', to: '/buyer/dashboard', icon: <Home className="h-4 w-4" /> },
   { label: 'Saved Properties', to: '/buyer/saved', icon: <FileText className="h-4 w-4" /> },
-  { label: 'My Bookings', to: '/buyer/bookings', icon: <BarChart3 className="h-4 w-4" /> },
+  { label: 'My Bookings', to: '/buyer/bookings', icon: <CalendarCheck className="h-4 w-4" /> },
+  { label: 'Messages', to: '/buyer/chats', icon: <MessageCircle className="h-4 w-4" /> },
+  { label: 'Payments', to: '/buyer/transactions', icon: <CreditCard className="h-4 w-4" /> },
+  { label: 'Installments', to: '/buyer/installments', icon: <Receipt className="h-4 w-4" /> },
   { label: 'Settings', to: '/settings', icon: <Settings className="h-4 w-4" /> },
 ];
 
@@ -120,5 +123,8 @@ export const adminNav: NavItem[] = [
   { label: 'Users', to: '/admin/users', icon: <Users className="h-4 w-4" /> },
   { label: 'Listings', to: '/admin/listings', icon: <FileText className="h-4 w-4" /> },
   { label: 'Verifications', to: '/admin/verifications', icon: <Shield className="h-4 w-4" /> },
+  { label: 'Bookings', to: '/admin/bookings', icon: <CalendarCheck className="h-4 w-4" /> },
+  { label: 'Transactions', to: '/admin/transactions', icon: <CreditCard className="h-4 w-4" /> },
+  { label: 'Reports', to: '/admin/reports', icon: <Flag className="h-4 w-4" /> },
   { label: 'Settings', to: '/settings', icon: <Settings className="h-4 w-4" /> },
 ];
