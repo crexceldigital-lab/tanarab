@@ -27,6 +27,13 @@ import AdminDashboard from "./pages/dashboards/AdminDashboard";
 import AdminUsers from "./pages/dashboards/AdminUsers";
 import AdminListings from "./pages/dashboards/AdminListings";
 import AdminVerifications from "./pages/dashboards/AdminVerifications";
+import AdminBookings from "./pages/dashboards/AdminBookings";
+import AdminTransactions from "./pages/dashboards/AdminTransactions";
+import AdminReports from "./pages/dashboards/AdminReports";
+import MyBookings from "./pages/dashboards/MyBookings";
+import MyTransactions from "./pages/dashboards/MyTransactions";
+import MyInstallments from "./pages/dashboards/MyInstallments";
+import MyChats from "./pages/dashboards/MyChats";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
