@@ -38,7 +38,7 @@ const HeroSection = () => {
         >
           <h1 className="font-heading text-4xl font-bold leading-tight text-secondary-foreground md:text-5xl lg:text-6xl">
             Find Your Dream Property in{' '}
-            <span className="text-primary">Tanzania</span>
+            <span className="text-primary">Tanzania &amp; UAE</span>
           </h1>
           <p className="mt-5 text-lg text-secondary-foreground/70 md:text-xl">
             Explore verified projects, flexible payment plans, and top developers across East Africa's fastest-growing market.
