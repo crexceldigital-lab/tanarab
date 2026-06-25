@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Building2, Mail, ArrowLeft, Loader2 } from 'lucide-react';
+import { Mail, ArrowLeft, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+import Logo from '@/components/Logo';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -27,16 +28,13 @@ const ForgotPassword = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background p-6">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
-        <Link to="/" className="mb-8 inline-flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-            <Building2 className="h-5 w-5 text-primary-foreground" />
-          </div>
-          <span className="font-heading text-xl font-bold text-foreground">TANARAB</span>
+        <Link to="/" className="mb-8 inline-flex">
+          <Logo size="md" />
         </Link>
 
         {sent ? (
           <div className="text-center">
-            <h2 className="mb-2 font-heading text-2xl font-bold text-foreground">Check your email</h2>
+            <h2 className="mb-2 font-display text-2xl font-semibold text-foreground">Check your email</h2>
             <p className="text-sm text-muted-foreground">We've sent a password reset link to <strong>{email}</strong></p>
             <Button variant="outline" className="mt-6 gap-2" asChild>
               <Link to="/login"><ArrowLeft className="h-4 w-4" /> Back to login</Link>
@@ -44,7 +42,7 @@ const ForgotPassword = () => {
           </div>
         ) : (
           <>
-            <h2 className="mb-2 font-heading text-2xl font-bold text-foreground">Reset your password</h2>
+            <h2 className="mb-2 font-display text-2xl font-semibold text-foreground">Reset your password</h2>
             <p className="mb-6 text-sm text-muted-foreground">Enter your email and we'll send you a reset link</p>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
@@ -54,7 +52,7 @@ const ForgotPassword = () => {
                   <Input type="email" placeholder="you@example.com" value={email} onChange={e => setEmail(e.target.value)} className="pl-10" required />
                 </div>
               </div>
-              <Button type="submit" className="w-full" disabled={loading}>
+              <Button type="submit" variant="luxury" className="w-full" disabled={loading}>
                 {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 Send Reset Link
               </Button>

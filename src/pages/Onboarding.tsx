@@ -36,7 +36,7 @@ const Onboarding = () => {
       verification_status: selected === 'user' ? 'approved' : 'pending',
     });
     if (error) { toast.error(error.message); setSaving(false); return; }
-    toast.success('Welcome to TANARAB!');
+    toast.success('Welcome to TanRab!');
     navigate('/dashboard');
   };
 
@@ -45,7 +45,7 @@ const Onboarding = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background p-6">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
-        <h1 className="mb-2 font-heading text-2xl font-bold text-foreground">What are you here for?</h1>
+        <h1 className="mb-2 font-display text-2xl font-semibold text-foreground">What are you here for?</h1>
         <p className="mb-6 text-sm text-muted-foreground">Choose your role to get started. You can change this later.</p>
         <div className="space-y-3">
           {roles.map(r => (
@@ -64,7 +64,7 @@ const Onboarding = () => {
             </button>
           ))}
         </div>
-        <Button className="mt-6 w-full" onClick={handleSave} disabled={saving}>
+        <Button variant="luxury" className="mt-6 w-full" onClick={handleSave} disabled={saving}>
           {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           Get Started
         </Button>

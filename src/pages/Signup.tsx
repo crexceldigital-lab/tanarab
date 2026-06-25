@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Building2, Mail, Lock, User, Phone, Briefcase, Eye, EyeOff, Loader2, ArrowRight, ArrowLeft, ShoppingCart, Home, HardHat } from 'lucide-react';
+import { Mail, Lock, User, Phone, Briefcase, Eye, EyeOff, Loader2, ArrowRight, ArrowLeft, ShoppingCart, Home, HardHat } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -9,6 +9,8 @@ import { supabase } from '@/integrations/supabase/client';
 import { lovable } from '@/integrations/lovable';
 import { toast } from 'sonner';
 import type { Database } from '@/integrations/supabase/types';
+import Logo from '@/components/Logo';
+import GoldDivider from '@/components/GoldDivider';
 
 type AppRole = Database['public']['Enums']['app_role'];
 
@@ -71,19 +73,17 @@ const Signup = () => {
 
   return (
     <div className="flex min-h-screen bg-background">
-      <div className="hidden w-1/2 items-center justify-center bg-primary p-12 lg:flex">
-        <div className="max-w-md text-primary-foreground">
-          <div className="mb-8 flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-foreground/20">
-              <Building2 className="h-7 w-7" />
-            </div>
-            <span className="font-heading text-3xl font-bold">TANARAB</span>
-          </div>
-          <h1 className="font-heading text-4xl font-bold leading-tight">
+      <div className="relative hidden w-1/2 items-center justify-center overflow-hidden bg-hero-gradient p-12 lg:flex">
+        <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-gold-500/10 blur-3xl" />
+        <div className="absolute -bottom-24 -left-16 h-72 w-72 rounded-full bg-gold-500/5 blur-3xl" />
+        <div className="relative max-w-md">
+          <Logo variant="light" size="lg" linkTo={null} />
+          <GoldDivider light className="my-6 justify-start" />
+          <h1 className="font-display text-4xl font-semibold leading-tight text-white">
             Join Tanzania's Premier Real Estate Platform
           </h1>
-          <p className="mt-4 text-lg opacity-90">
-            Whether you're buying, selling, or developing — TANARAB has the tools you need.
+          <p className="mt-4 text-lg text-white/70">
+            Whether you're buying, selling, or developing — TanRab has the tools you need.
           </p>
         </div>
       </div>
@@ -91,18 +91,15 @@ const Signup = () => {
       <div className="flex flex-1 items-center justify-center p-6">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
           <div className="mb-6 text-center lg:text-left">
-            <Link to="/" className="mb-6 inline-flex items-center gap-2 lg:hidden">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-                <Building2 className="h-5 w-5 text-primary-foreground" />
-              </div>
-              <span className="font-heading text-xl font-bold text-foreground">TANARAB</span>
-            </Link>
-            <h2 className="font-heading text-2xl font-bold text-foreground">Create your account</h2>
+            <div className="mb-6 inline-flex justify-center lg:hidden">
+              <Logo size="md" />
+            </div>
+            <h2 className="font-display text-2xl font-semibold text-foreground">Create your account</h2>
             <p className="mt-1 text-sm text-muted-foreground">Step {step} of 3</p>
             {/* Progress bar */}
             <div className="mt-3 flex gap-1">
               {[1, 2, 3].map(s => (
-                <div key={s} className={`h-1 flex-1 rounded-full transition-colors ${s <= step ? 'bg-primary' : 'bg-border'}`} />
+                <div key={s} className={`h-1 flex-1 rounded-full transition-colors ${s <= step ? 'bg-gold-500' : 'bg-border'}`} />
               ))}
             </div>
           </div>
@@ -210,7 +207,7 @@ const Signup = () => {
                   </div>
                   <div className="flex gap-3">
                     <Button type="button" variant="outline" onClick={() => setStep(2)} className="gap-1"><ArrowLeft className="h-4 w-4" /> Back</Button>
-                    <Button type="submit" className="flex-1" disabled={loading}>
+                    <Button type="submit" variant="luxury" className="flex-1" disabled={loading}>
                       {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                       Create Account
                     </Button>

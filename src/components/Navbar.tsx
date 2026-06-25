@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Building2, User, LogOut } from 'lucide-react';
+import { Menu, X, User, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/contexts/AuthContext';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import ThemeToggle from '@/components/ThemeToggle';
+import Logo from '@/components/Logo';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,8 +17,16 @@ import {
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { user, profile, signOut, isLoading } = useAuth();
   const initials = profile?.full_name?.split(' ').map(n => n[0]).join('').toUpperCase() || 'U';
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const navLinks = [
     { label: 'Home', to: '/' },
@@ -28,19 +37,28 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur-xl">
+    <nav
+      className={`sticky top-0 z-50 border-b transition-all duration-300 ${
+        scrolled
+          ? 'border-border bg-card/90 shadow-[0_4px_24px_-8px_hsl(217_50%_15%/0.12)] backdrop-blur-xl'
+          : 'border-transparent bg-card/60 backdrop-blur-md'
+      }`}
+    >
+      {/* hairline gold accent */}
+      <div className="h-[2px] w-full bg-gold-gradient" />
+
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link to="/" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-secondary">
-            <Building2 className="h-5 w-5 text-secondary-foreground" />
-          </div>
-          <span className="font-heading text-xl font-bold tracking-tight text-foreground">TANA<span className="text-primary">RAB</span></span>
-        </Link>
+        <Logo size="md" />
 
         <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((l) => (
-            <Link key={l.to} to={l.to} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+            <Link
+              key={l.to}
+              to={l.to}
+              className="group relative text-sm font-medium text-muted-foreground transition-colors hover:text-secondary"
+            >
               {l.label}
+              <span className="absolute -bottom-1.5 left-0 h-[1.5px] w-0 bg-gold-500 transition-all duration-300 group-hover:w-full" />
             </Link>
           ))}
         </div>
@@ -51,7 +69,7 @@ const Navbar = () => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="gap-2 px-2">
-                  <Avatar className="h-8 w-8">
+                  <Avatar className="h-8 w-8 ring-1 ring-gold-500/40">
                     <AvatarFallback className="bg-secondary text-xs text-secondary-foreground">{initials}</AvatarFallback>
                   </Avatar>
                   <span className="text-sm font-medium text-foreground">{profile?.full_name || user.email}</span>
@@ -68,7 +86,7 @@ const Navbar = () => {
               <Button variant="ghost" size="sm" asChild>
                 <Link to="/login"><User className="mr-1.5 h-4 w-4" /> Sign In</Link>
               </Button>
-              <Button size="sm" asChild>
+              <Button size="sm" variant="luxury" asChild>
                 <Link to="/signup">Sign Up</Link>
               </Button>
             </>
@@ -77,8 +95,8 @@ const Navbar = () => {
 
         <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
-          <button onClick={() => setMobileOpen(!mobileOpen)}>
-            {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          <button onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
+            {mobileOpen ? <X className="h-6 w-6 text-secondary" /> : <Menu className="h-6 w-6 text-secondary" />}
           </button>
         </div>
       </div>
@@ -110,7 +128,7 @@ const Navbar = () => {
                     <Button variant="outline" size="sm" asChild>
                       <Link to="/login" onClick={() => setMobileOpen(false)}>Sign In</Link>
                     </Button>
-                    <Button size="sm" asChild>
+                    <Button size="sm" variant="luxury" asChild>
                       <Link to="/signup" onClick={() => setMobileOpen(false)}>Sign Up</Link>
                     </Button>
                   </>

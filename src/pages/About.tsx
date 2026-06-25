@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Shield, Users, MapPin, TrendingUp, Phone, Building2 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import GoldDivider from '@/components/GoldDivider';
 
 const values = [
   { icon: Shield, title: 'Trust & Transparency', desc: 'Every developer and listing on our platform undergoes rigorous verification. We ensure buyers have access to accurate, up-to-date property information so they can invest with confidence.' },
@@ -24,12 +25,18 @@ const About = () => (
     <Navbar />
 
     {/* Hero */}
-    <section className="border-b border-border bg-muted/30 py-16 md:py-24">
-      <div className="container mx-auto px-4 text-center">
+    <section className="relative overflow-hidden bg-hero-gradient py-20 md:py-28">
+      <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-gold-500/10 blur-3xl" />
+      <div className="container relative mx-auto px-4 text-center">
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
+          <span className="eyebrow justify-center text-gold-300">Tanzania &middot; East Africa &middot; The Gulf</span>
+          <GoldDivider light className="mt-3" />
+        </motion.div>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="font-heading text-3xl font-bold text-foreground md:text-5xl"
+          transition={{ delay: 0.05 }}
+          className="mt-5 font-display text-3xl font-semibold text-white md:text-5xl"
         >
           Building Tanzania's Most Trusted<br className="hidden sm:block" /> Real Estate Platform
         </motion.h1>
@@ -37,9 +44,9 @@ const About = () => (
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mx-auto mt-4 max-w-2xl text-muted-foreground"
+          className="mx-auto mt-4 max-w-2xl text-white/70"
         >
-          TANARAB connects property buyers, investors, and verified developers across Tanzania — bringing transparency, trust, and modern technology to one of Africa's most dynamic real estate markets.
+          TanRab connects property buyers, investors, and verified developers across Tanzania — bringing transparency, trust, and modern technology to one of Africa's most dynamic real estate markets.
         </motion.p>
       </div>
     </section>
@@ -49,7 +56,7 @@ const About = () => (
       <div className="container mx-auto grid grid-cols-2 gap-6 px-4 md:grid-cols-4">
         {stats.map((s) => (
           <motion.div key={s.label} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center">
-            <p className="font-heading text-3xl font-bold text-primary">{s.value}</p>
+            <p className="font-display text-3xl font-bold text-gold-600">{s.value}</p>
             <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
           </motion.div>
         ))}
@@ -60,15 +67,18 @@ const About = () => (
     <section className="py-16">
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-3xl space-y-6 text-muted-foreground">
-          <h2 className="font-heading text-2xl font-bold text-foreground md:text-3xl">Our Mission</h2>
+          <div>
+            <span className="eyebrow">Our Mission</span>
+            <h2 className="mt-2 font-display text-2xl font-semibold text-foreground md:text-3xl">Simplifying Cross-Border Real Estate</h2>
+          </div>
           <p>
             Tanzania's real estate market is booming, yet finding verified properties and trustworthy developers remains a challenge for many buyers. Scattered listings across social media, lack of standardized information, and limited transparency create friction at every step of the property journey.
           </p>
           <p>
-            TANARAB was created to solve this. We provide a centralized marketplace where every listing is verified, every developer is vetted, and every buyer has access to the information they need — from floor plans and payment schedules to project completion timelines and Google Maps locations.
+            TanRab was created to solve this. We provide a centralized marketplace where every listing is verified, every developer is vetted, and every buyer has access to the information they need — from floor plans and payment schedules to project completion timelines and Google Maps locations.
           </p>
           <p>
-            Whether you're looking for a modern apartment in Dar es Salaam's Masaki peninsula, a family home in Dodoma, commercial space in Arusha, or an off-plan investment in Kigamboni's waterfront developments, TANARAB gives you the tools to search, compare, and connect directly with developers — no middlemen, no surprises.
+            Whether you're looking for a modern apartment in Dar es Salaam's Masaki peninsula, a family home in Dodoma, commercial space in Arusha, or an off-plan investment in Kigamboni's waterfront developments, TanRab gives you the tools to search, compare, and connect directly with developers — no middlemen, no surprises.
           </p>
         </div>
       </div>
@@ -77,7 +87,11 @@ const About = () => (
     {/* Values */}
     <section className="border-t border-border bg-muted/30 py-16">
       <div className="container mx-auto px-4">
-        <h2 className="mb-10 text-center font-heading text-2xl font-bold text-foreground md:text-3xl">What We Stand For</h2>
+        <div className="mb-10 text-center">
+          <span className="eyebrow justify-center">What We Stand For</span>
+          <h2 className="mt-2 font-display text-2xl font-semibold text-foreground md:text-3xl">Our Values</h2>
+          <GoldDivider className="mt-4" />
+        </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {values.map((v, i) => (
             <motion.div
@@ -86,10 +100,12 @@ const About = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="rounded-xl border border-border bg-card p-6"
+              className="rounded-2xl border border-border bg-card p-6 card-elevated"
             >
-              <v.icon className="mb-3 h-6 w-6 text-primary" />
-              <h3 className="mb-2 font-heading text-lg font-semibold text-foreground">{v.title}</h3>
+              <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-navy-900">
+                <v.icon className="h-5 w-5 text-gold-400" />
+              </div>
+              <h3 className="mb-2 font-display text-lg font-semibold text-foreground">{v.title}</h3>
               <p className="text-sm text-muted-foreground">{v.desc}</p>
             </motion.div>
           ))}
@@ -101,7 +117,10 @@ const About = () => (
     <section className="py-16">
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-3xl space-y-6 text-muted-foreground">
-          <h2 className="font-heading text-2xl font-bold text-foreground md:text-3xl">Tanzania's Real Estate Landscape</h2>
+          <div>
+            <span className="eyebrow">Market Landscape</span>
+            <h2 className="mt-2 font-display text-2xl font-semibold text-foreground md:text-3xl">Tanzania's Real Estate Landscape</h2>
+          </div>
           <p>
             With a population exceeding 65 million and an urbanization rate of over 5% annually, Tanzania presents one of the most compelling real estate investment opportunities in sub-Saharan Africa. Cities like Dar es Salaam, Dodoma, Arusha, and Mwanza are experiencing rapid growth in both residential and commercial property development.
           </p>
@@ -109,7 +128,7 @@ const About = () => (
             Key infrastructure projects — including the Standard Gauge Railway (SGR), the Julius Nyerere Hydropower Project, and major road expansions — are opening up new corridors for property development. Areas like Kigamboni, Bagamoyo Road, and Kibaha are seeing increased developer activity as accessibility improves.
           </p>
           <p>
-            The government's push toward a formal property registration system and digital land management is further boosting investor confidence. TANARAB is positioning itself at the intersection of these trends, providing the digital infrastructure that Tanzania's evolving property market needs.
+            The government's push toward a formal property registration system and digital land management is further boosting investor confidence. TanRab is positioning itself at the intersection of these trends — and at the intersection of Tanzania and the Gulf — providing the digital infrastructure that this evolving property market needs.
           </p>
         </div>
       </div>

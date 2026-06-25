@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Building2, Mail, Lock, Eye, EyeOff, Loader2 } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { supabase } from '@/integrations/supabase/client';
 import { lovable } from '@/integrations/lovable';
 import { toast } from 'sonner';
+import Logo from '@/components/Logo';
+import GoldDivider from '@/components/GoldDivider';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -42,18 +44,16 @@ const Login = () => {
   return (
     <div className="flex min-h-screen bg-background">
       {/* Left panel — branding */}
-      <div className="hidden w-1/2 items-center justify-center bg-primary p-12 lg:flex">
-        <div className="max-w-md text-primary-foreground">
-          <div className="mb-8 flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-foreground/20">
-              <Building2 className="h-7 w-7" />
-            </div>
-            <span className="font-heading text-3xl font-bold">TANARAB</span>
-          </div>
-          <h1 className="font-heading text-4xl font-bold leading-tight">
+      <div className="relative hidden w-1/2 items-center justify-center overflow-hidden bg-hero-gradient p-12 lg:flex">
+        <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-gold-500/10 blur-3xl" />
+        <div className="absolute -bottom-24 -left-16 h-72 w-72 rounded-full bg-gold-500/5 blur-3xl" />
+        <div className="relative max-w-md">
+          <Logo variant="light" size="lg" linkTo={null} />
+          <GoldDivider light className="my-6 justify-start" />
+          <h1 className="font-display text-4xl font-semibold leading-tight text-white">
             Find Your Perfect Property in Tanzania
           </h1>
-          <p className="mt-4 text-lg opacity-90">
+          <p className="mt-4 text-lg text-white/70">
             Connect with verified developers, explore projects, and invest with confidence.
           </p>
         </div>
@@ -67,13 +67,10 @@ const Login = () => {
           className="w-full max-w-md"
         >
           <div className="mb-8 text-center lg:text-left">
-            <Link to="/" className="mb-6 inline-flex items-center gap-2 lg:hidden">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-                <Building2 className="h-5 w-5 text-primary-foreground" />
-              </div>
-              <span className="font-heading text-xl font-bold text-foreground">TANARAB</span>
-            </Link>
-            <h2 className="font-heading text-2xl font-bold text-foreground">Welcome back</h2>
+            <div className="mb-6 inline-flex justify-center lg:hidden">
+              <Logo size="md" />
+            </div>
+            <h2 className="font-display text-2xl font-semibold text-foreground">Welcome back</h2>
             <p className="mt-1 text-sm text-muted-foreground">Sign in to your account to continue</p>
           </div>
 
@@ -121,7 +118,7 @@ const Login = () => {
                 </button>
               </div>
             </div>
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" variant="luxury" className="w-full" disabled={loading}>
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Sign In
             </Button>

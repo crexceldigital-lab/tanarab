@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,91 +6,109 @@
 
 @layer base {
   :root {
-    /* White backgrounds */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
+    /* Warm ivory canvas — luxury paper-stock feel */
+    --background: 36 38% 97%;
+    --foreground: 217 45% 12%;
 
-    /* Cards: white */
+    /* Cards: crisp white off the ivory backdrop */
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
+    --card-foreground: 217 45% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
+    --popover-foreground: 217 45% 12%;
 
-    /* Primary: Orange #fca311 → HSL 40 97% 53% */
-    --primary: 40 97% 53%;
-    --primary-foreground: 0 0% 0%;
+    /* Primary: TanRab Gold #C9A227 → HSL */
+    --primary: 45 64% 47%;
+    --primary-foreground: 217 50% 11%;
 
-    /* Secondary: Dark Blue #14213d → HSL 222 52% 16% */
-    --secondary: 222 52% 16%;
-    --secondary-foreground: 0 0% 100%;
+    /* Secondary: TanRab Navy #0E1C33 → HSL */
+    --secondary: 217 50% 15%;
+    --secondary-foreground: 36 38% 96%;
 
-    /* Muted: Light Gray #e5e5e5 → HSL 0 0% 90% */
-    --muted: 0 0% 90%;
-    --muted-foreground: 0 0% 35%;
+    /* Muted: warm stone gray */
+    --muted: 36 22% 93%;
+    --muted-foreground: 217 14% 40%;
 
-    /* Accent: Orange (same as primary for highlights) */
-    --accent: 40 97% 53%;
-    --accent-foreground: 0 0% 0%;
+    /* Accent: lighter gold for hover/highlight states */
+    --accent: 43 72% 60%;
+    --accent-foreground: 217 50% 11%;
 
-    --destructive: 0 72% 51%;
+    --destructive: 5 65% 48%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 85%;
-    --input: 0 0% 85%;
-    --ring: 40 97% 53%;
+    --border: 36 20% 87%;
+    --input: 36 20% 87%;
+    --ring: 45 64% 47%;
 
-    --radius: 0.75rem;
+    --radius: 0.9rem;
 
     --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 222 52% 16%;
-    --sidebar-primary: 40 97% 53%;
-    --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 0 0% 90%;
-    --sidebar-accent-foreground: 222 52% 16%;
-    --sidebar-border: 0 0% 85%;
-    --sidebar-ring: 40 97% 53%;
+    --sidebar-foreground: 217 45% 14%;
+    --sidebar-primary: 45 64% 47%;
+    --sidebar-primary-foreground: 217 50% 11%;
+    --sidebar-accent: 36 22% 93%;
+    --sidebar-accent-foreground: 217 45% 14%;
+    --sidebar-border: 36 20% 87%;
+    --sidebar-ring: 45 64% 47%;
 
-    /* Custom tokens */
-    --hero-gradient: linear-gradient(135deg, hsl(40 97% 53%), hsl(38 95% 45%));
-    --card-shadow: 0 2px 12px -2px hsl(0 0% 0% / 0.06);
-    --card-shadow-hover: 0 12px 30px -4px hsl(0 0% 0% / 0.12);
-    --success: 150 60% 40%;
+    /* TanRab brand tokens */
+    --gold: 45 64% 47%;
+    --gold-soft: 43 72% 64%;
+    --navy: 217 50% 15%;
+    --navy-deep: 217 58% 8%;
+
+    --hero-gradient: linear-gradient(135deg, hsl(217 58% 8%), hsl(217 48% 18%) 55%, hsl(217 55% 11%));
+    --gold-gradient: linear-gradient(135deg, hsl(45 70% 55%), hsl(40 80% 68%));
+    --card-shadow: 0 2px 16px -4px hsl(217 50% 15% / 0.10);
+    --card-shadow-hover: 0 22px 44px -12px hsl(217 50% 15% / 0.22);
+    --gold-glow: 0 8px 30px -6px hsl(45 64% 47% / 0.35);
+
+    --success: 152 42% 32%;
     --success-foreground: 0 0% 100%;
-    --warning: 38 90% 55%;
-    --warning-foreground: 0 0% 0%;
+    --warning: 38 85% 52%;
+    --warning-foreground: 217 50% 11%;
 
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
   .dark {
-    --background: 0 0% 3%;
-    --foreground: 0 0% 95%;
-    --card: 222 52% 10%;
-    --card-foreground: 0 0% 95%;
-    --popover: 222 52% 10%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 40 97% 53%;
-    --primary-foreground: 0 0% 0%;
-    --secondary: 222 52% 22%;
-    --secondary-foreground: 0 0% 95%;
-    --muted: 222 30% 15%;
-    --muted-foreground: 0 0% 55%;
-    --accent: 40 97% 53%;
-    --accent-foreground: 0 0% 0%;
-    --destructive: 0 62.8% 30.6%;
+    --background: 217 58% 8%;
+    --foreground: 36 28% 94%;
+    --card: 217 46% 11%;
+    --card-foreground: 36 28% 94%;
+    --popover: 217 46% 11%;
+    --popover-foreground: 36 28% 94%;
+    --primary: 45 70% 56%;
+    --primary-foreground: 217 55% 9%;
+    --secondary: 217 38% 19%;
+    --secondary-foreground: 36 28% 94%;
+    --muted: 217 32% 16%;
+    --muted-foreground: 36 10% 64%;
+    --accent: 43 72% 60%;
+    --accent-foreground: 217 55% 9%;
+    --destructive: 5 60% 42%;
     --destructive-foreground: 0 0% 100%;
-    --border: 222 30% 20%;
-    --input: 222 30% 20%;
-    --ring: 40 97% 53%;
-    --sidebar-background: 222 52% 8%;
-    --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 40 97% 53%;
-    --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 222 30% 15%;
-    --sidebar-accent-foreground: 0 0% 90%;
-    --sidebar-border: 222 30% 20%;
-    --sidebar-ring: 40 97% 53%;
+    --border: 217 30% 21%;
+    --input: 217 30% 21%;
+    --ring: 45 70% 56%;
+
+    --gold: 45 70% 56%;
+    --gold-soft: 43 75% 66%;
+    --navy: 217 38% 19%;
+    --navy-deep: 217 58% 6%;
+
+    --hero-gradient: linear-gradient(135deg, hsl(217 58% 6%), hsl(217 46% 14%) 55%, hsl(217 55% 9%));
+    --card-shadow: 0 2px 16px -4px hsl(0 0% 0% / 0.4);
+    --card-shadow-hover: 0 22px 44px -12px hsl(0 0% 0% / 0.55);
+
+    --sidebar-background: 217 50% 9%;
+    --sidebar-foreground: 36 20% 92%;
+    --sidebar-primary: 45 70% 56%;
+    --sidebar-primary-foreground: 217 55% 9%;
+    --sidebar-accent: 217 32% 16%;
+    --sidebar-accent-foreground: 36 20% 92%;
+    --sidebar-border: 217 30% 21%;
+    --sidebar-ring: 45 70% 56%;
   }
 }
 
@@ -126,17 +144,41 @@
 }
 
 @layer utilities {
+  .font-display {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
   .text-gradient {
     @apply bg-clip-text text-transparent;
     background-image: var(--hero-gradient);
   }
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gold-gradient);
+  }
+  .bg-gold-gradient {
+    background-image: var(--gold-gradient);
+  }
+  .bg-hero-gradient {
+    background-image: var(--hero-gradient);
+  }
   .card-elevated {
     box-shadow: var(--card-shadow);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    transition: box-shadow 0.35s ease, transform 0.35s ease;
   }
   .card-elevated:hover {
     box-shadow: var(--card-shadow-hover);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+  }
+  .shadow-gold-glow {
+    box-shadow: var(--gold-glow);
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em];
+    color: hsl(var(--gold));
+  }
+  .divider-line {
+    background-image: linear-gradient(90deg, transparent, hsl(var(--gold) / 0.7), transparent);
+    height: 1px;
   }
   .scrollbar-none {
     -ms-overflow-style: none;

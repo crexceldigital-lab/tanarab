@@ -1,8 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { Building2, LogOut, User, Home, BarChart3, FileText, Settings, Users, Shield, Bell, CalendarCheck, CreditCard, Receipt, MessageCircle, Flag } from 'lucide-react';
+import { LogOut, Home, Building2, BarChart3, FileText, Settings, Users, Shield, Bell, CalendarCheck, CreditCard, Receipt, MessageCircle, Flag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import Logo from '@/components/Logo';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,19 +38,14 @@ const DashboardLayout = ({ children, title, navItems }: Props) => {
       {/* Sidebar */}
       <aside className="hidden w-64 shrink-0 border-r border-border bg-card lg:block">
         <div className="flex h-16 items-center gap-2 border-b border-border px-6">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-              <Building2 className="h-4 w-4 text-primary-foreground" />
-            </div>
-            <span className="font-heading text-lg font-bold text-foreground">TANARAB</span>
-          </Link>
+          <Logo size="sm" />
         </div>
         <nav className="flex flex-col gap-1 p-4">
           {navItems.map(item => (
             <Link
               key={item.to}
               to={item.to}
-              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-gold-50 hover:text-secondary"
             >
               {item.icon}
               {item.label}
@@ -62,7 +58,7 @@ const DashboardLayout = ({ children, title, navItems }: Props) => {
       <div className="flex flex-1 flex-col">
         <header className="flex h-16 items-center justify-between border-b border-border bg-card px-6">
           <div className="flex items-center gap-3">
-            <h1 className="font-heading text-lg font-bold text-foreground">{title}</h1>
+            <h1 className="font-display text-lg font-semibold text-foreground">{title}</h1>
             {verificationBadge}
           </div>
           <div className="flex items-center gap-3">
@@ -70,8 +66,8 @@ const DashboardLayout = ({ children, title, navItems }: Props) => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="gap-2 px-2">
-                  <Avatar className="h-8 w-8">
-                    <AvatarFallback className="bg-primary text-xs text-primary-foreground">{initials}</AvatarFallback>
+                  <Avatar className="h-8 w-8 ring-1 ring-gold-500/40">
+                    <AvatarFallback className="bg-secondary text-xs text-secondary-foreground">{initials}</AvatarFallback>
                   </Avatar>
                   <span className="hidden text-sm font-medium text-foreground sm:inline">{profile?.full_name || user?.email}</span>
                 </Button>
