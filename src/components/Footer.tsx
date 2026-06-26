@@ -21,6 +21,7 @@ const Footer = () => (
           <h4 className="mb-3 font-display text-sm font-semibold uppercase tracking-wide text-gold-300">Explore</h4>
           <div className="flex flex-col gap-2 text-sm text-white/60">
             <Link to="/properties" className="transition-colors hover:text-gold-300">Properties</Link>
+            <Link to="/rent" className="transition-colors hover:text-gold-300">Rent</Link>
             <Link to="/developers" className="transition-colors hover:text-gold-300">Developers</Link>
             <Link to="/about" className="transition-colors hover:text-gold-300">About Us</Link>
           </div>

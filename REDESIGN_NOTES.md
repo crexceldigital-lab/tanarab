@@ -61,3 +61,54 @@ they already look navy/gold. If you want the same hand-styling treatment
 
 ## Verified
 `npm run build` and `npx tsc --noEmit` both pass cleanly on this project.
+
+---
+
+# Round 2 — Developers Page + Rent Page
+
+## Developers page (`src/pages/Developers.tsx`)
+Rebuilt as an interactive directory:
+- **`src/data/mockDevelopers.ts`** — richer developer profiles (rating, founded
+  year, active/completed projects, description, linked flagship project).
+- **`src/components/DeveloperCard.tsx`** — each card shows real project
+  photography (pulled from the existing property image library via
+  `getPropertyGallery`), with clickable thumbnail dots to preview different
+  project photos, an overlapping logo-initials badge, a star rating, a
+  stats strip (active / completed / founded), a WhatsApp quick-contact
+  button, and links to the flagship project and the developer's full
+  project list.
+- Page-level additions: search-by-name, city filter pills, a sort dropdown
+  (Most Active / Highest Rated / Name), live result count, empty state, and
+  matching hero/CTA banners.
+
+## New Rent page (`src/pages/Rent.tsx`)
+A full rental-specific experience, added to the nav as **Rent** (`/rent`):
+- **`src/data/mockRentals.ts`** + **`src/data/rentalImages.ts`** — 9 sample
+  rental listings (apartments, studios, a villa, a house) across five
+  cities.
+- **`src/components/filters/RentFilters.tsx`** + **`RentPriceFilter.tsx`** —
+  search, city, bedroom count, a monthly-rent range filter, and a "More
+  filters" popover with a move-in date calendar, furnished-only and
+  pet-friendly-only toggles.
+- **`src/components/RentalCard.tsx`** — hover-swap photo thumbnails, a
+  save/heart toggle (persisted to `localStorage`), furnished/pet-friendly/
+  lease-length pills, an "Available from" date, a WhatsApp button, and a
+  "View Details" quick-view dialog with a full photo gallery, amenities
+  grid, and a **Request a Tour** flow (date + time-slot picker — see
+  `src/components/RequestTourDialog.tsx`, which is self-contained and
+  doesn't require a backend table).
+- Toolbar: live result count, **Saved (n)** filter toggle, sort (Newest /
+  Price asc/desc / Soonest available), and a **grid/list view toggle** that
+  actually changes the card layout (not just the column count).
+- A trust strip ("Verified Landlords", "No Hidden Fees", "Flexible
+  Move-In", "Direct Contact") matching the rest of the site's section style.
+
+## Routing / nav changes
+- `src/App.tsx` — added `<Route path="/rent" element={<Rent />} />`.
+- `src/components/Navbar.tsx` — added a **Rent** link.
+- `src/components/Footer.tsx` — added a **Rent** link under Explore.
+
+## Verified (round 2)
+`npm run build`, `npx tsc --noEmit`, and `npx eslint src` all pass with zero
+new errors or warnings introduced by these changes.
+

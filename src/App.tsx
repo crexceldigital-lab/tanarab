@@ -9,6 +9,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 
 import Index from "./pages/Index";
 import Properties from "./pages/Properties";
+import Rent from "./pages/Rent";
 import MapSearch from "./pages/MapSearch";
 import PropertyDetail from "./pages/PropertyDetail";
 import Developers from "./pages/Developers";
@@ -50,6 +51,7 @@ const App = () => (
               {/* Public */}
               <Route path="/" element={<Index />} />
               <Route path="/properties" element={<Properties />} />
+              <Route path="/rent" element={<Rent />} />
               <Route path="/map-search" element={<MapSearch />} />
               <Route path="/projects" element={<MapSearch />} />
               <Route path="/property/:id" element={<PropertyDetail />} />
